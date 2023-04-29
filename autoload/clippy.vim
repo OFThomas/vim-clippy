@@ -76,7 +76,7 @@ function! s:fill(str, len)
   return a:str . repeat(' ', a:len - strlen(a:str))
 endfunction
 
-function! ClippyErrors(timer=0)
+function! clippy#ClippyErrors(timer=0)
     let l:counts = ale#statusline#Count(bufnr(''))
     if l:counts.total == 0
         call clippy#close()

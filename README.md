@@ -27,35 +27,9 @@ call clippy#show(['Hello World!'])
 In your `.vimrc` file, add the following:
 
 ```viml
-function! Clippy(msg)
-    call clippy#show([a:msg])
-endfunction
-
-function! ClippyErrors()
-    let l:counts = ale#statusline#Count(bufnr(''))
-    let l:all_errors = l:counts.error + l:counts.style_error
-    if l:all_errors == 0
-        call clippy#close()
-        return 
-    endif 
-    let l:errors = []
-    for l:err in ale#engine#GetLoclist(bufnr(''))
-        call add(l:errors, "L" . l:err.lnum . " col " . l:err.col .  " " . l:err.text)
-    endfor
-    call clippy#show(l:errors)
-endfunction
-
-nmap Q :call clippy#show(['Did you mean :q?']) <CR>
-nmap g/ :call ClippyErrors() <CR>
-
-set updatetime=1000
-
-augroup clippy
-    autocmd!
-    autocmd BufEnter,BufReadPost,BufWritePost,CursorHold,CursorHoldI,InsertEnter,InsertLeave * call ClippyErrors()
-    autocmd TextChanged,TextChangedI,TextYankPost * call ClippyErrors()
-augroup end
+call timer_start(300, function('clippy#ClippyErrors'), {'repeat': -1})
 ```
+where the time is in milliseconds (300ms here).
 
 And to disable Ale in the loclist / quickfix window
 ```viml
