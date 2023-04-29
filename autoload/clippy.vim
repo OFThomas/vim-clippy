@@ -5,15 +5,13 @@ function! clippy#show(content)
   let sep = repeat('─', max)
 
   let content = [
-    \   '',
     \   ' ╭──╮   ',
     \   ' │  │   ',
     \   ' @  @  ╭',
     \   ' ││ ││ │',
     \   ' ││ ││ ╯',
     \   ' │╰─╯│',
-    \   ' ╰───╯'
-    \ ]
+    \   ' ╰───╯']
 
   call s:add(content, 1, '╭─' . sep . '─╮')
   call s:add(content, 2, '│ ' . s:fill(get(a:content, 0, ''), max) . ' │')
