@@ -10,8 +10,8 @@ function! clippy#show(content)
     \   ' @  @  ╭',
     \   ' ││ ││ │',
     \   ' ││ ││ ╯',
-    \   ' │╰─╯│',
-    \   ' ╰───╯']
+    \   ' │╰─╯│  ',
+    \   ' ╰───╯  ']
 
   call s:add(content, 1, '╭─' . sep . '─╮')
   call s:add(content, 2, '│ ' . s:fill(get(a:content, 0, ''), max) . ' │')
@@ -21,7 +21,7 @@ function! clippy#show(content)
 
   let width = s:max(content) + 1
 
-  let config = { 'width': width, 'height': 9 }
+  let config = { 'width': width, 'height': 7 }
   let frame = s:calculate_frame(config)
 
   if !exists('t:clippy_winid')
