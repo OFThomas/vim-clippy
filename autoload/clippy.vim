@@ -76,3 +76,18 @@ function! s:fill(str, len)
   return a:str . repeat(' ', a:len - strlen(a:str))
 endfunction
 
+function! ClippyErrors(timer=0)
+    let l:counts = ale#statusline#Count(bufnr(''))
+    if l:counts.total == 0
+        call clippy#close()
+        return 
+    endif
+
+    let l:errors = []
+    for l:err in ale#engine#GetLoclist(bufnr(''))
+        call add(l:errors, "L" . l:err.lnum . " col " . l:err.col .  " " . l:err.text)
+    endfor
+    call clippy#show(l:errors)
+endfunction
+
+
