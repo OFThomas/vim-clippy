@@ -85,7 +85,7 @@ function! clippy#ClippyErrors(timer=0)
 
     let l:errors = []
     for l:err in ale#engine#GetLoclist(bufnr(''))
-        call add(l:errors, "L" . l:err.lnum . " col " . l:err.col .  " " . l:err.text)
+        call add(l:errors, "L" . l:err.lnum . ":" . l:err.col .  " " . l:err.text)
     endfor
     call clippy#show(l:errors)
 endfunction
